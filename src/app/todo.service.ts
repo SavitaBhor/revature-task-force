@@ -13,8 +13,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TodoService {
-  todosUrl:string = 'https://jsonplaceholder.typicode.com/todos';
-  //todosUrl:string = 'http://100.25.22.116:8080/todos';
+  //todosUrl:string = 'https://jsonplaceholder.typicode.com/todos';
+  todosUrl:string = 'http://100.25.22.116:8080/todos';
+  //todosUrl:string ='http://100.25.22.116:8080/swagger-ui.html';
 
   constructor(private http:HttpClient) { }
 
