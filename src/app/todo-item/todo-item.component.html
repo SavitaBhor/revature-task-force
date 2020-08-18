@@ -1,6 +1,6 @@
 <div [ngClass] ="setClasses()">
     <p (click)="onClick(todo)">
-        <input (change)="onToggle(todo)" type="checkbox"/>
+        <input (change)="onToggle(todo)" (click)="onClickToggle()" type="checkbox"/>
         <span *ngIf="!selectedTodo || todo.id != selectedTodo.id" class="todo-row">{{ todo.title }}</span>
 
         <span *ngIf="selectedTodo && todo.id == selectedTodo.id">

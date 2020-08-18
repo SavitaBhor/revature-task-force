@@ -50,5 +50,8 @@ export class TodoItemComponent implements OnInit {
     this.todoService.clickTodoItem(null);
   }
 
+  onClickToggle(): void {
+    event.stopPropagation();
+  }
   
 }
