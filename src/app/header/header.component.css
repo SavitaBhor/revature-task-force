@@ -1,11 +1,10 @@
-.header {
-    background: #333;
+.heading {
+    background: #555;;
     color: #fff;
     text-align: center;
     padding: 10px;
+    font-size: large;
   }
   
-  .header a {
-    color: #fff;
-    text-decoration: none;
-  }
+  
+
