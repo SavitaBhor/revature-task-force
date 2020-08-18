@@ -5,7 +5,7 @@
 
         <span *ngIf="selectedTodo && todo.id == selectedTodo.id">
             <input [(ngModel)]="selectedTodo.title" placeholder="description"/>
-            <button>Save</button>
+            <button (click)="saveTodoItem(todo)">Save</button>
         </span>
         
         <button (click)="onDelete(todo)" class="del">x</button>

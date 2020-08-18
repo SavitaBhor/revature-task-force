@@ -43,6 +43,10 @@ export class TodoItemComponent implements OnInit {
   onClick(clickedTodoItem: Todo): void {
     this.todoService.clickTodoItem(clickedTodoItem);
   }
+  
+  saveTodoItem(savedTodo: Todo): void {
+    console.log(savedTodo);
+  }
 
   
 }
