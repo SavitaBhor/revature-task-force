@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Todo } from '../Todo';
 import { TodoService } from '../todo.service';
 

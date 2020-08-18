@@ -2,11 +2,8 @@
     <p (click)="onClick(todo)">
         <input (change)="onToggle(todo)" type="checkbox"/>
         {{ todo.title }}
+        <!-- <input [(ngModel)]="selectedTodo.title" placeholder="description"/> -->
+        <!-- <button>Save</button> -->
         <button (click)="onDelete(todo)" class="del">x</button>
     </p>
-    <div *ngIf="selectedTodo">
-        <label>Title:
-            <input [(ngModel)]="selectedTodo.title" placeholder="description"/>
-        </label>
-    </div>
 </div>
