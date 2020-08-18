@@ -41,4 +41,10 @@ export class TodoService {
     return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
   }
 
+  // Handles the user clicking on todo row
+  clickTodoItem(selectedTodoItem: Todo):Todo {
+    console.log("Inside the service: ");
+    console.log(selectedTodoItem);
+    return selectedTodoItem;
+  }
 }
