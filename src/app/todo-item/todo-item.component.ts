@@ -39,9 +39,9 @@ export class TodoItemComponent implements OnInit {
     this.deleteTodo.emit(todo);
   }
 
-  onClick(todoItem): void {
-    console.log(todoItem);
-    this.selectedTodo = todoItem;
+  onClick(clickedTodoItem: Todo): void {
+    console.log(clickedTodoItem);
+    this.selectedTodo = clickedTodoItem;
   }
 
 }
