@@ -48,7 +48,8 @@ export class TodoService {
 
   // Handles the user clicking on todo row
   clickTodoItem(selectedTodoItem: Todo) {
-    this.selectedTodoItem = selectedTodoItem;
+    // this.selectedTodoItem = selectedTodoItem;
+    console.log(selectedTodoItem);
     this.selectionResponse.next(selectedTodoItem);
   }
 }
