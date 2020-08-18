@@ -11,12 +11,12 @@ import { TodoService } from '../todo.service';
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
   @Output() deleteTodo : EventEmitter<Todo> = new EventEmitter();
-  @Output() clickTodoItem : EventEmitter<Todo> = new EventEmitter();
   selectedTodo: Todo;
 
   constructor(private todoService:TodoService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.todoService.currentSelectedObservable.subscribe((val) => { this.selectedTodo = val; });
   }
   
   // Set Dynamic Classes
@@ -41,10 +41,8 @@ export class TodoItemComponent implements OnInit {
   }
 
   onClick(clickedTodoItem: Todo): void {
-    console.log("Item Component");
-    console.log(clickedTodoItem);
-    this.selectedTodo = clickedTodoItem;
     this.todoService.clickTodoItem(clickedTodoItem);
   }
 
+  
 }
