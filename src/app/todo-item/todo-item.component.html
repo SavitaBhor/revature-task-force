@@ -1,19 +1,12 @@
 <div [ngClass] ="setClasses()">
     <p (click)="onClick(todo)">
         <input (change)="onToggle(todo)" type="checkbox"/>
-        <span class="todo-row">{{ todo.title }}</span>
+        <span *ngIf="!selectedTodo || todo.id != selectedTodo.id" class="todo-row">{{ todo.title }}</span>
 
-
-        <span class="todo-row">{{ todo.id }}</span>
-        <span *ngIf="selectedTodo" class="todo-row">{{ selectedTodo.id }}</span>
-
-
-        <!-- <span *ngIf="selectedTodo" ng-show="todo.id == selectedTodo.id"> -->
         <span *ngIf="selectedTodo && todo.id == selectedTodo.id">
             <input [(ngModel)]="selectedTodo.title" placeholder="description"/>
-            <!-- <button>Save</button> -->
+            <button>Save</button>
         </span>
-
         
         <button (click)="onDelete(todo)" class="del">x</button>
     </p>
