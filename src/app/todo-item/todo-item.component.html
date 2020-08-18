@@ -4,8 +4,8 @@
         <span *ngIf="!selectedTodo || todo.id != selectedTodo.id" class="todo-row">{{ todo.title }}</span>
 
         <span *ngIf="selectedTodo && todo.id == selectedTodo.id">
-            <input [(ngModel)]="selectedTodo.title" placeholder="description"/>
-            <button (click)="saveTodoItem(todo)">Save</button>
+            <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/>
+            <button (click)="saveTodoItem(todo)" class="todo-input">Save</button>
         </span>
         
         <button (click)="onDelete(todo)" class="del">x</button>

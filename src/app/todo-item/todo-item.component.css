@@ -17,6 +17,10 @@
   .todo-row {
     padding-left: 12px;
   }
+
+  .todo-input {
+    margin-left: 12px;
+  }
   
   .is-complete {
     text-decoration: line-through;
