@@ -14,6 +14,7 @@ export class TodosComponent implements OnInit {
 
   ngOnInit() {
     this.getTodos();
+    //console.log(Todo);
   }
 
   getTodos(): void {
@@ -28,6 +29,7 @@ export class TodosComponent implements OnInit {
       .subscribe(todo => {
         this.todos.push(todo);
       });
+      this.getTodos();
   }
   
   delete(todo: Todo): void {
