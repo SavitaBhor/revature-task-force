@@ -1,17 +1,22 @@
 <h2>My Todos</h2>
 <div>
   <label>Todo name:
-    <input #todoName />
+    <input #todoName class="inputbox"/>
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
   <button (click)="add(todoName.value); todoName.value=''">
-    add
+    Add
   </button>
 </div>
 <ul class="todos">
   <li *ngFor="let todo of todos">
-    <a routerLink="/todos/{{todo.id}}">
-      <span class="badge">{{todo.id}}</span> {{todo.title}}
+    <a routerLink="/todos/{{todo.id}}" *ngIf="todo.completed == false">
+      <span class="badge">{{todo.id}}</span> 
+      <span [ngClass]="'plain'">{{todo.title}}</span>
+    </a>
+    <a routerLink="/todos/{{todo.id}}" *ngIf="todo.completed == true">
+      <span class="badge">{{todo.id}}</span> 
+      <span [ngClass]="'linethrouh'">{{todo.title}}</span>
     </a>
     <button class="delete" title="delete todo"
       (click)="delete(todo)">x</button>
