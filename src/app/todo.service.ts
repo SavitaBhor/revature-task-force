@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Todo } from './todo';
+import { Todo } from './Todo';
 
-import { Observable, of } from 'rxjs';
+import { Observable, throwError, observable } from 'rxjs';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { catchError, retry } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +22,32 @@ export class TodoService {
 
    /** GET todos from the server */
   getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.todosUrl);
+    return this.http.get<Todo[]>(this.todosUrl)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+    
+
   }
 
   /** GET hero by id. Will 404 if id not found */
   getTodo(id: number): Observable<Todo> {
     const url = `${this.todosUrl}/${id}`;
-    return this.http.get<Todo>(url);
+    return this.http.get<Todo>(url)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   /** POST: add a new hero to the server */
   addTodo(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.todosUrl, todo, this.httpOptions);
+    return this.http.post<Todo>(this.todosUrl, todo, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   /** DELETE: delete the hero from the server */
@@ -40,7 +55,24 @@ export class TodoService {
     const id = typeof todo === 'number' ? todo : todo.id;
     const url = `${this.todosUrl}/${id}`;
   
-    return this.http.delete<Todo>(url, this.httpOptions);
+    return this.http.delete<Todo>(url, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 
 }
