@@ -39,6 +39,10 @@ export class TodosComponent implements OnInit {
     this.todoService.clickTodoItem(clickedTodoItem);
   }
 
+  cancelUpdateTodoItem(): void {
+    this.todoService.clickTodoItem(null);
+  }
+
   delete(todo: Todo): void {
     this.todos = this.todos.filter(t => t !== todo);
     this.todoService.deleteTodo(todo).subscribe();

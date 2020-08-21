@@ -27,8 +27,9 @@
           <td *ngIf="selectedTodo && todo.id == selectedTodo.id">
               <button (click)="completeTodoItem(todo)" class="todo-row">Mark Complete</button>
               <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/>
+              <button (click)="cancelUpdateTodoItem()" class="right-button">Cancel</button>
               <button (click)="saveTodoItem(todo)" class="right-button">Save</button>
-              <button (click)="cancelUpdateTodoItem(todo)" class="right-button">Cancel</button>
+              
           </td>
          
           <td>
