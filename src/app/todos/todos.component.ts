@@ -18,11 +18,12 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     this.getTodos();
     this.todoService.currentSelectedObservable.subscribe((val) => { this.selectedTodo = val; });
+    
   }
 
   getTodos(): void {
     this.todoService.getTodos()
-    .subscribe(todos => this.todos = todos);
+    .subscribe(todos => { this.todos = todos; });
   }
 
   add(title: string): void {
@@ -53,7 +54,7 @@ export class TodosComponent implements OnInit {
   }
 
   completeTodoItem(clickedTodoItem: Todo): void {
-    console.log(clickedTodoItem);
+    clickedTodoItem.completed = true;
   }
 
   saveTodoItem(clickedTodoItem: Todo): void {

@@ -22,10 +22,11 @@
        <tr *ngFor="let todo of todos">
           <td>{{ todo.id }}</td>
           <td *ngIf="!selectedTodo || todo.id != selectedTodo.id">
-            <span [ngClass]="{'plain': this.todo.completed, 'inethrouh': !this.todo.completed}">{{ todo.title }}</span>
+            <span [ngClass]="{'plain': !this.todo.completed, 'inethrouh': this.todo.completed}">{{ todo.title }}</span>
           </td>
           <td *ngIf="selectedTodo && todo.id == selectedTodo.id">
-              <button (click)="completeTodoItem(todo)" class="todo-row">Mark Complete</button>
+              <button *ngIf="!todo.completed" (click)="completeTodoItem(todo)" class="todo-row">Mark Complete</button>
+              <span *ngIf="todo.completed" class="todo-row">Completed</span>
               <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/>
               <button (click)="cancelUpdateTodoItem()" class="right-button">Cancel</button>
               <button (click)="saveTodoItem(todo)" class="right-button">Save</button>
