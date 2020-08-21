@@ -7,22 +7,6 @@
     Add
   </button>
 </div>
-<!--
-<ul class="todos">
-  <li *ngFor="let todo of todos">
-    <a routerLink="/todos/{{todo.id}}" *ngIf="this.todo.completed == false">
-      <span class="badge">{{todo.id}}</span> 
-      <span [ngClass]="'plain'">{{todo.title}}</span>
-    </a>
-    <a routerLink="/todos/{{todo.id}}" *ngIf="this.todo.completed == true">
-      <span class="badge">{{todo.id}}</span> 
-      <span [ngClass]="'linethrouh'">{{todo.title}}</span>
-    </a>
-    <button class="delete" title="delete todo"
-      (click)="delete(todo)">x</button>
-  </li>
-</ul>
--->
 <div>
   <table>
     <thead>
@@ -36,18 +20,20 @@
     <tbody>
       
        <tr *ngFor="let todo of todos">
-          <td>{{ todo.id }}</td>
-          <td *ngIf="this.todo.completed == false">
-            <span [ngClass]="'plain'">{{ todo.title }}</span>
+          <td>{{ todo.id }} </td>
+          <td *ngIf="!selectedTodo || todo.id != selectedTodo.id">
+            <span [ngClass]="{'plain': !this.todo.completed, 'linethrough': this.todo.completed}">{{ todo.title }}</span>
           </td>
-          <td *ngIf="this.todo.completed == true">
-            <span [ngClass]="'linethrouh'">{{ todo.title }}</span>
+          <td *ngIf="selectedTodo && todo.id == selectedTodo.id">
+              <button *ngIf="!todo.completed" (click)="completeTodoItem(todo)" class="todo-row">Mark Complete</button>
+              <span *ngIf="todo.completed" class="todo-row">Completed</span>
+              <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/>
+              <button (click)="cancelUpdateTodoItem()" class="right-button">Cancel</button>
+              <button (click)="saveTodoItem(todo)" class="right-button">Save</button>
           </td>
          
           <td>
-            <a routerLink="/todos/{{todo.id}}">
-              <button title="update todo">Edit</button>
-            </a>
+              <button title="update todo" (click)="editTodo(todo)">Edit</button>
           </td>
           <td>
              <button title="delete todo" (click)="delete(todo)">Delete</button>

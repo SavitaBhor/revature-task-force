@@ -104,6 +104,21 @@ button.delete {
     text-decoration: none;
 }
 
-.linethrouh{
+.linethrough{
   text-decoration: line-through;
+}
+
+.todo-row {
+  padding-left: 12px;
+  width: 20%;
+}
+
+.todo-input {
+  margin-left: 12px;
+  width: 50%;
+}
+
+.right-button {
+  float: right;
+  width: 12%;
 }

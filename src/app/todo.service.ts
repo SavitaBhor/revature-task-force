@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './Todo';
-
-import { Observable, throwError, observable } from 'rxjs';
-
+import { Observable, BehaviorSubject, throwError, observable } from 'rxjs';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -11,8 +9,11 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TodoService {
+  selectedTodoItem: Todo;
+  selectionResponse = new BehaviorSubject<any>('');
+  currentSelectedObservable = this.selectionResponse.asObservable();
 
-  todosUrl:string ='http://13.59.213.214:8080/todos'; // URL to web api
+  todosUrl:string ='http://localhost:8080/todos'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,6 +30,15 @@ export class TodoService {
     );
     
 
+  }
+
+  /** PUT hero by id. Alertboxes with any error. */
+  putTodo(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(this.todosUrl, todo, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   /** GET hero by id. Will 404 if id not found */
@@ -75,4 +85,8 @@ export class TodoService {
     return throwError(errorMessage);
   }
 
+  /** For letting all the todo items know who is selected */
+  clickTodoItem(selectedTodoItem: Todo) {
+    this.selectionResponse.next(selectedTodoItem);
+  }
 }
