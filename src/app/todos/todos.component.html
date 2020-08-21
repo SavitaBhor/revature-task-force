@@ -1,0 +1,61 @@
+<div>
+  <label>Todo name:
+    <input #todoName class="inputbox"/>
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(todoName.value); todoName.value=''">
+    Add
+  </button>
+</div>
+<!--
+<ul class="todos">
+  <li *ngFor="let todo of todos">
+    <a routerLink="/todos/{{todo.id}}" *ngIf="this.todo.completed == false">
+      <span class="badge">{{todo.id}}</span> 
+      <span [ngClass]="'plain'">{{todo.title}}</span>
+    </a>
+    <a routerLink="/todos/{{todo.id}}" *ngIf="this.todo.completed == true">
+      <span class="badge">{{todo.id}}</span> 
+      <span [ngClass]="'linethrouh'">{{todo.title}}</span>
+    </a>
+    <button class="delete" title="delete todo"
+      (click)="delete(todo)">x</button>
+  </li>
+</ul>
+-->
+<div>
+  <table>
+    <thead>
+       <tr>
+          <th>#ID</th>
+          <th>Title</th>
+          
+          <th colspan="2">Action</th>
+       </tr>
+    </thead>
+    <tbody>
+      
+       <tr *ngFor="let todo of todos">
+          <td>{{ todo.id }}</td>
+          <td *ngIf="this.todo.completed == false">
+            <span [ngClass]="'plain'">{{ todo.title }}</span>
+          </td>
+          <td *ngIf="this.todo.completed == true">
+            <span [ngClass]="'linethrouh'">{{ todo.title }}</span>
+          </td>
+         
+          <td>
+            <a routerLink="/todos/{{todo.id}}">
+              <button title="update todo">Edit</button>
+            </a>
+          </td>
+          <td>
+             <button title="delete todo" (click)="delete(todo)">Delete</button>
+            
+          </td>
+      
+       </tr>
+    
+    </tbody>
+ </table>
+</div>
