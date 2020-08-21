@@ -35,6 +35,10 @@ export class TodosComponent implements OnInit {
       
   }
   
+  editTodo(todo: Todo): void {
+    console.log(todo);
+  }
+  
   delete(todo: Todo): void {
     this.todos = this.todos.filter(t => t !== todo);
     this.todoService.deleteTodo(todo).subscribe();
