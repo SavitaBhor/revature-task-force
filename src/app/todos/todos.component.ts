@@ -9,7 +9,7 @@ import { TodoService } from '../todo.service';
 })
 export class TodosComponent implements OnInit {
   todos: Todo[];
-  selectedTodo: Todo = {id: 0, title: '', completed: false};
+  selectedTodo: Todo;
   unsavedVersion: Todo;
   
 
