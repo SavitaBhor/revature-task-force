@@ -12,7 +12,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class TodoService {
 
-  todosUrl:string ='http://13.59.213.214:8080/todos'; // URL to web api
+  todosUrl:string ='http://localhost:8080/todos'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
