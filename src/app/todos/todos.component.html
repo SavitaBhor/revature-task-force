@@ -21,18 +21,14 @@
       
        <tr *ngFor="let todo of todos">
           <td>{{ todo.id }}</td>
-          <td *ngIf="this.todo.completed == false">
-            <span [ngClass]="'plain'">{{ todo.title }}</span>
+          <td *ngIf="!selectedTodo || todo.id != selectedTodo.id">
+            <span [ngClass]="{'plain': this.todo.completed, 'inethrouh': !this.todo.completed}">{{ todo.title }}</span>
           </td>
-          <td *ngIf="this.todo.completed == true">
-            <span [ngClass]="'linethrouh'">{{ todo.title }}</span>
-          </td>
-          <td>
-            <span>xxx{{ todo.id }} => {{ selectedTodo.id }}</span>
-            <!-- <span *ngIf="selectedTodo && todo.id == selectedTodo.id"> -->
-              <!-- <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/> -->
-              <!-- <button (click)="saveTodoItem(todo)" class="todo-input">Save</button> -->
-            <!-- </span> -->
+          <td *ngIf="selectedTodo && todo.id == selectedTodo.id">
+              <button (click)="completeTodoItem(todo)" class="todo-input">Complete</button>
+              <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/>
+              <button (click)="saveTodoItem(todo)" class="todo-input">Save</button>
+              <button (click)="cancelUpdateTodoItem(todo)" class="todo-input">Cancel</button>
           </td>
          
           <td>
