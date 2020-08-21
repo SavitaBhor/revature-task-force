@@ -9,14 +9,14 @@ import { TodoService } from '../todo.service';
 })
 export class TodosComponent implements OnInit {
   todos: Todo[];
+  selectedTodo: Todo = {id: 0, title: '', completed: false};
   
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    
     this.getTodos();
-    
+    this.todoService.currentSelectedObservable.subscribe((val) => { this.selectedTodo = val; });
   }
 
   getTodos(): void {
@@ -35,10 +35,10 @@ export class TodosComponent implements OnInit {
       
   }
   
-  editTodo(todo: Todo): void {
-    console.log(todo);
+  editTodo(clickedTodoItem: Todo): void {
+    this.todoService.clickTodoItem(clickedTodoItem);
   }
-  
+
   delete(todo: Todo): void {
     this.todos = this.todos.filter(t => t !== todo);
     this.todoService.deleteTodo(todo).subscribe();

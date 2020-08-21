@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './Todo';
-
-import { Observable, throwError, observable } from 'rxjs';
-
+import { Observable, BehaviorSubject, throwError, observable } from 'rxjs';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -11,6 +9,9 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TodoService {
+  selectedTodoItem: Todo;
+  selectionResponse = new BehaviorSubject<any>('');
+  currentSelectedObservable = this.selectionResponse.asObservable();
 
   todosUrl:string ='http://localhost:8080/todos'; // URL to web api
 
@@ -75,4 +76,9 @@ export class TodoService {
     return throwError(errorMessage);
   }
 
+  /** For letting all the todo items know who is selected */
+  clickTodoItem(selectedTodoItem: Todo) {
+    console.log(selectedTodoItem);
+    this.selectionResponse.next(selectedTodoItem);
+  }
 }

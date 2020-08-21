@@ -27,6 +27,13 @@
           <td *ngIf="this.todo.completed == true">
             <span [ngClass]="'linethrouh'">{{ todo.title }}</span>
           </td>
+          <td>
+            <span>xxx{{ todo.id }} => {{ selectedTodo.id }}</span>
+            <!-- <span *ngIf="selectedTodo && todo.id == selectedTodo.id"> -->
+              <!-- <input [(ngModel)]="selectedTodo.title" placeholder="description" class="todo-input"/> -->
+              <!-- <button (click)="saveTodoItem(todo)" class="todo-input">Save</button> -->
+            <!-- </span> -->
+          </td>
          
           <td>
               <button title="update todo" (click)="editTodo(todo)">Edit</button>
