@@ -22,7 +22,7 @@
        <tr *ngFor="let todo of todos">
           <td>{{ todo.id }}</td>
           <td *ngIf="!selectedTodo || todo.id != selectedTodo.id">
-            <span [ngClass]="{'plain': !this.todo.completed, 'inethrouh': this.todo.completed}">{{ todo.title }}</span>
+            <span [ngClass]="{'plain': !this.todo.completed, 'linethrough': this.todo.completed}">{{ todo.title }}</span>
           </td>
           <td *ngIf="selectedTodo && todo.id == selectedTodo.id">
               <button *ngIf="!todo.completed" (click)="completeTodoItem(todo)" class="todo-row">Mark Complete</button>

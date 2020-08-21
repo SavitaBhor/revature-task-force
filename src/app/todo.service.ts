@@ -32,6 +32,15 @@ export class TodoService {
 
   }
 
+  /** PUT hero by id. Alertboxes with any error. */
+  putTodo(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(this.todosUrl, todo, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   /** GET hero by id. Will 404 if id not found */
   getTodo(id: number): Observable<Todo> {
     const url = `${this.todosUrl}/${id}`;

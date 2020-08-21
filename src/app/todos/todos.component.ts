@@ -58,7 +58,8 @@ export class TodosComponent implements OnInit {
   }
 
   saveTodoItem(clickedTodoItem: Todo): void {
-    console.log(clickedTodoItem);
+    this.todoService.putTodo(clickedTodoItem).subscribe(todo => this.getTodos());
+    this.todoService.clickTodoItem({id: 0, title: '', completed: false});
   }
 
   delete(todo: Todo): void {
