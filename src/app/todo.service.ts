@@ -78,7 +78,7 @@ export class TodoService {
 
   /** For letting all the todo items know who is selected */
   clickTodoItem(selectedTodoItem: Todo) {
-    console.log(selectedTodoItem);
+    selectedTodoItem.completed = true;
     this.selectionResponse.next(selectedTodoItem);
   }
 }
