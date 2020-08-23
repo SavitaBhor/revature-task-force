@@ -11,7 +11,7 @@
   <table>
     <thead>
        <tr>
-          <th>#ID</th>
+          <th colspan="2">#ID</th>
           <th>Title</th>
           
           <th colspan="2">Action</th>
@@ -21,6 +21,7 @@
       
        <tr *ngFor="let todo of todos">
           <td>{{ todo.id }} </td>
+          <td><a routerLink="/todos/{{ todo.id }}">Details</a></td>
           <td *ngIf="!selectedTodo || todo.id != selectedTodo.id">
             <span [ngClass]="{'plain': !this.todo.completed, 'linethrough': this.todo.completed}">{{ todo.title }}</span>
           </td>
