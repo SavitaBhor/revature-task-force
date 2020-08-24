@@ -18,17 +18,22 @@ import {
 export class TodoSearchComponent implements OnInit {
   todos$: Observable<Todo[]>;
   private searchTerms = new Subject<string>();
-
+  searTermsObsver = this.searchTerms.asObservable();
+  title:string;
+  todo:Todo;
   constructor(private todoService: TodoService) {}
-
+  allTodos:Todo[];
+  filterTodos:Todo[];
   // Push a search term into the observable stream.
   search(term: string): void {
-        console.log(term);
-        //this.todoService.searchTodos(term);
-    this.searchTerms.next(term);
+    this.filterTodos = []
+    for (let todo of this.allTodos) {
+      if (todo.title.includes(term)) { this.filterTodos.push(todo); }
   }
-
+  }
   ngOnInit(): void {
+    this.todoService.getTodos().subscribe(todos => { this.allTodos = todos; });
+
     this.todos$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
