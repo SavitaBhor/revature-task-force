@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh '''npm i
 npm run build
-cp dist/todos-frontend/* /deploy'''
+cp dist/revature-task-force/* /deploy'''
       }
     }
 
@@ -28,6 +28,7 @@ cp dist/todos-frontend/* /deploy'''
         expression {
           env.BRANCH_NAME == 'master'
         }
+
       }
       steps {
         sh 'aws s3 cp /deploy s3://my-jenkins-task-force-bucket-123 --recursive --acl public-read'
