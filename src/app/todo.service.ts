@@ -40,12 +40,7 @@ return null;
       // if not search term, return empty hero array.
       return of([]);
     }
-   // this.allTodos = this.http.get<Todo[]>(this.todosUrl);
     return this.http.get<Todo[]>(`${this.todosUrl}/?id=${term}`).pipe(
-      //tap(x => x.length ?
-       //  this.log(`found todos matching "${term}"`) :
-        // this.log(`no todos matching "${term}"`)),
-     // catchError(this.handleError<Todo[]>('searchTodos', []))
     );
   }
   /** PUT hero by id. Alertboxes with any error. */
