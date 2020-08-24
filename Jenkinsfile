@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh '''npm i
 npm run build
-cp dist/revature-task-force/* /deploy'''
+cp dist/task-force/* /deploy'''
       }
     }
 
