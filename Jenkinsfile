@@ -24,6 +24,11 @@ cp dist/todos-frontend/* /deploy'''
         }
 
       }
+      when {
+        expression {
+          env.BRANCH_NAME == 'master'
+        }
+      }
       steps {
         sh 'aws s3 cp /deploy s3://my-jenkins-task-force-bucket-123 --recursive --acl public-read'
       }
