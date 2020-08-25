@@ -1,7 +1,26 @@
-<div *ngIf="todo">
-    <h2>Details</h2>
-    <div class="line"><span>ID: </span>{{todo.id}}</div>
-    <div class="line"><span>Title: </span>{{todo.title}}</div>
-    <div class="line"><span>{{completedText}}</span></div>
-    <button class="line" (click)="goBack()">Go Back</button>
-  </div>
+<div *ngIf="todo && !editMode">
+  <h2>Details</h2>
+  <div class="line"><span>ID: </span>{{todo.id}}</div>
+  <div class="line"><span>Title: </span>{{todo.title}}</div>
+  <div class="line"><span>{{completedText}}</span></div>
+  <button class="line" (click)="goBack()">Go Back</button>
+  <button class="line" (click)="editTodo(todo)">Edit</button>
+</div>
+
+<div *ngIf="todo && editMode">
+  <h2>Edit Todo</h2>
+
+  <div class="line"><button *ngIf="!todo.completed" (click)="completeTodoItem(todo)" class="todo-row">Mark Complete</button></div>
+  <div class="line"><span *ngIf="todo.completed" class="todo-row">Completed</span></div>
+
+
+  <div class="line"><input [(ngModel)]="todo.title" placeholder="title" class="todo-input"/></div>
+
+  <button (click)="cancelUpdateTodoItem()" class="line">Cancel</button>
+  <button (click)="saveTodoItem(todo)" class="line">Save</button>
+</div>
+
+    
+    
+    
+    

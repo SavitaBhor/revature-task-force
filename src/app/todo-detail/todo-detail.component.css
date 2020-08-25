@@ -19,3 +19,7 @@ div{
 .line {
     margin: 12px;
 }
+
+input  {
+  width: 100%;
+}
