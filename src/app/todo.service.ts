@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './Todo';
-import { Observable, BehaviorSubject, throwError, observable } from 'rxjs';
+import { Observable, BehaviorSubject, throwError, observable,of } from 'rxjs';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
+import { getLocaleExtraDayPeriods } from '@angular/common';
 
 
 @Injectable({
@@ -12,8 +13,8 @@ export class TodoService {
   selectedTodoItem: Todo;
   selectionResponse = new BehaviorSubject<any>('');
   currentSelectedObservable = this.selectionResponse.asObservable();
-
-  todosUrl:string ='http://localhost:8080/todos'; // URL to web api
+  allTodos :Todo[];
+    todosUrl:string = 'http://13.59.213.214:8080/todos';//'http://localhost:8080/todos'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,7 +32,17 @@ export class TodoService {
     
 
   }
-
+  checkApi(){
+return null;
+  }
+  searchTodos(term: string): Observable<Todo[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Todo[]>(`${this.todosUrl}/?id=${term}`).pipe(
+    );
+  }
   /** PUT hero by id. Alertboxes with any error. */
   putTodo(todo: Todo): Observable<Todo> {
     return this.http.put<Todo>(this.todosUrl, todo, this.httpOptions)
