@@ -28,7 +28,10 @@ export class TodosComponent implements OnInit {
 
   add(title: string): void {
     title = title.trim();
-    if (!title) { return; }
+    if (!title) { 
+      alert("Please enter Task Name.");
+      return; 
+    }
     this.todoService.addTodo({ title } as Todo)
       .subscribe(todo => {
         //this.todos.push(todo);
