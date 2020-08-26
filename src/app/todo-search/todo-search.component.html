@@ -1,8 +1,16 @@
 <div id="search-component">
     <h4><label for="search-box">Todo Search</label></h4>
-  
-    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-  
+    <form >
+      <select #searchBy>
+      <option (click)="searchSet(searchBy.value)">Title</option>
+      <option (click)="searchSet(searchBy.value)">Completed</option>
+      <option (click)="searchSet(searchBy.value)">Id</option>
+    </select>
+  </form>
+    <input *ngIf="searchType.valueOf() == 'Title'" #searchBox1 (input)="searchTitle(searchBox1.value)" />
+    <input *ngIf="searchType.valueOf() == 'Id'" #searchBox2 (input)="searchId(searchBox2.value)" />
+    <input *ngIf="searchType.valueOf() == 'Completed'" #searchBox3 (input)="searchActive(searchBox3.value)" />
+        <button (click)="findall()"> Find All</button>
     <ul class="search-result">
       <li *ngFor="let todo of filterTodos" >
         <a routerLink="/todos/{{todo.id}}" routerLinkActive="active">
