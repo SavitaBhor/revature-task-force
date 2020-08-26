@@ -63,7 +63,7 @@ this.searchType =lookFor;
     //Search through all todos to look for matching id
     this.filterTodos = [];
     for (let todo of this.allTodos) {
-      if (todo.id.valueOf()===term.valueOf()) { this.filterTodos.push(todo); }
+      if (todo.id.valueOf()==term.valueOf()) { this.filterTodos.push(todo); }
   }
   }
   findall():void {
