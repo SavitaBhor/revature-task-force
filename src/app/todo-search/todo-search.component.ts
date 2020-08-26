@@ -20,6 +20,7 @@ export class TodoSearchComponent implements OnInit {
   private searchTerms = new Subject<string>();
   title:string;
   todo:Todo;
+  searchType:string;
 //Arrays
   allTodos:Todo[];
   filterTodos:Todo[];
@@ -27,18 +28,56 @@ export class TodoSearchComponent implements OnInit {
 
   constructor(private todoService: TodoService) {}
 
-  search(term: string): void {
-    //Search through all todos to look for matching title
-    this.filterTodos = []
-    for (let todo of this.allTodos) {
-      if (todo.title.includes(term)) { this.filterTodos.push(todo); }
-  }
-  }
 
+  searchSet(lookFor:string):void{
+this.searchType =lookFor;
+  }
+  searchTitle(term: string): void {
+    //Search through all todos to look for matching title
+    this.filterTodos = [];
+    for (let todo of this.allTodos) {
+      if (todo.title.toUpperCase().includes(term.toUpperCase())) { this.filterTodos.push(todo); }
+  }
+  }
+  searchActive(term: string): void {
+    //Search through all todos to look for if they are completed or not
+    this.filterTodos = [];
+    let isItDone:Boolean;
+    if(term.toUpperCase() == 'TRUE'||term.toUpperCase() == 'YES')
+    {
+   
+    isItDone = true;
+  }
+  else if(term.toUpperCase() == 'FALSE'||term.toUpperCase() == 'NO')
+  {
+    isItDone = false;
+
+  }
+  
+    for (let todo of this.allTodos) {
+      if (todo.completed===isItDone) { this.filterTodos.push(todo); }
+    }
+
+  }
+  searchId(term: number): void {
+    //Search through all todos to look for matching id
+    this.filterTodos = [];
+    for (let todo of this.allTodos) {
+      if (todo.id.valueOf()==term.valueOf()) { this.filterTodos.push(todo); }
+  }
+  }
+  findall():void {
+    //Search through all todos to look for matching title
+    this.filterTodos = [];
+    for (let todo of this.allTodos) {
+       this.filterTodos.push(todo); 
+  
+  }
+}
   ngOnInit(): void {
     //populates array with get request from api
     this.todoService.getTodos().subscribe(todos => { this.allTodos = todos; });
-
+    this.searchType = 'Title';
     this.todos$ = this.searchTerms.pipe(
       debounceTime(300),
 
