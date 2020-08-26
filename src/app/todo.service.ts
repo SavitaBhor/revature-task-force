@@ -13,8 +13,10 @@ export class TodoService {
   selectedTodoItem: Todo;
   selectionResponse = new BehaviorSubject<any>('');
   currentSelectedObservable = this.selectionResponse.asObservable();
+
+  todosUrl:string = 'http://13.59.213.214:8080/todos';
+    //todosUrl:string = 'http://localhost:8080/todos'; // URL to web api
   allTodos :Todo[];
-    todosUrl:string = 'http://13.59.213.214:8080/todos';//'http://localhost:8080/todos'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
